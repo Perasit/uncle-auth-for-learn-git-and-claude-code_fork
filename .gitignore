@@ -1,0 +1,10 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# pytest
+.pytest_cache/
+.pytest_tmp/
+
+# ข้อมูลผู้ใช้ (ห้าม commit ขึ้น repo)
+users.json
