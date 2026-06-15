@@ -47,10 +47,13 @@ def login():
     if request.method == "POST":
         username = request.form.get("username", "")
         password = request.form.get("password", "")
-        if accounts.authenticate(username, password):
-            session["username"] = username.strip()
-            return redirect(url_for("dashboard"))
-        flash("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง", "error")
+        try:
+            if accounts.authenticate(username, password):
+                session["username"] = username.strip()
+                return redirect(url_for("dashboard"))
+            flash("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง", "error")
+        except accounts.AccountError as e:
+            flash(str(e), "error")
     return render_template("login.html")
 
 
